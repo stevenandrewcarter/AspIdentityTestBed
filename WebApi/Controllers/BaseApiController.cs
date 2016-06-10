@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 using WebApi.Infrastructure;
+using WebApi.Models;
 
 namespace WebApi.Controllers {
   public class BaseApiController : ApiController {
