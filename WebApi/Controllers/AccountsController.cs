@@ -10,13 +10,13 @@ namespace WebApi.Controllers {
   [RoutePrefix("api/accounts")]
   public class AccountsController : BaseApiController {
 
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     [Route("users")]
     public IHttpActionResult GetUsers() {
       return Ok(AppUserManager.Users.ToList().Select(u => TheModelFactory.Create(u)));
     }
 
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     [Route("user/{id:guid}", Name = "GetUserById")]
     public async Task<IHttpActionResult> GetUser(string Id) {
       var user = await AppUserManager.FindByIdAsync(Id);
@@ -27,7 +27,7 @@ namespace WebApi.Controllers {
 
     }
 
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     [Route("user/{username}")]
     public async Task<IHttpActionResult> GetUserByName(string username) {
       var user = await AppUserManager.FindByNameAsync(username);
@@ -57,7 +57,7 @@ namespace WebApi.Controllers {
       }
       var code = await AppUserManager.GenerateEmailConfirmationTokenAsync(user.Id);
       var callbackUrl = new Uri(Url.Link("ConfirmEmailRoute", new { userId = user.Id, code = code }));
-      await AppUserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");     
+      await AppUserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
       var locationHeader = new Uri(Url.Link("GetUserById", new { id = user.Id }));
       return Created(locationHeader, TheModelFactory.Create(user));
     }
@@ -91,7 +91,7 @@ namespace WebApi.Controllers {
       return Ok();
     }
 
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     [Route("user/{id:guid}")]
     public async Task<IHttpActionResult> DeleteUser(string id) {
       var appUser = await AppUserManager.FindByIdAsync(id);
@@ -103,6 +103,33 @@ namespace WebApi.Controllers {
         return Ok();
       }
       return NotFound();
+    }
+
+    [Authorize(Roles = "Admin")]
+    [Route("user/{id:guid}/roles")]
+    [HttpPut]
+    public async Task<IHttpActionResult> AssignRolesToUser([FromUri] string id, [FromBody] string[] rolesToAssign) {
+      var appUser = await AppUserManager.FindByIdAsync(id);
+      if (appUser == null) {
+        return NotFound();
+      }
+      var currentRoles = await AppUserManager.GetRolesAsync(appUser.Id);
+      var rolesNotExists = rolesToAssign.Except(AppRoleManager.Roles.Select(x => x.Name)).ToArray();
+      if (rolesNotExists.Count() > 0) {
+        ModelState.AddModelError("", string.Format("Roles '{0}' does not exixts in the system", string.Join(",", rolesNotExists)));
+        return BadRequest(ModelState);
+      }
+      var removeResult = await AppUserManager.RemoveFromRolesAsync(appUser.Id, currentRoles.ToArray());
+      if (!removeResult.Succeeded) {
+        ModelState.AddModelError("", "Failed to remove user roles");
+        return BadRequest(ModelState);
+      }
+      var addResult = await AppUserManager.AddToRolesAsync(appUser.Id, rolesToAssign);
+      if (!addResult.Succeeded) {
+        ModelState.AddModelError("", "Failed to add user roles");
+        return BadRequest(ModelState);
+      }
+      return Ok();
     }
   }
 }

@@ -33,6 +33,7 @@ namespace WebApi {
         Provider = new CustomOAuthProvider(),
         AccessTokenFormat = new CustomJwtFormat("http://localhost:52123")
       };
+      app.CreatePerOwinContext<ApplicationRoleManager>(ApplicationRoleManager.Create);
       app.UseOAuthAuthorizationServer(oAuthServerOptions);
     }
 
