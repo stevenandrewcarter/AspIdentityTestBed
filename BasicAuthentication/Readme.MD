@@ -1,23 +1,32 @@
 ﻿# Basic Authentication
 
-This project helps with building a basic authentication example with ASP.NET Identity. The idea is configure a RESTful API that will use
+This project a Basic Authentication example with ASP.NET Identity. The idea is to configure a RESTful API that will use
 Basic Authentication to verify the User Credentials.
 
 ## What is Basic Authentication
 
 In the HTTP Protocol [Basic Authentication](https://tools.ietf.org/html/rfc2617) is created by the following steps.
+
 * Take the Username and Password and concatenate them together with a ':'. Username:Password
 * Take that result and [Base64 Encode](https://tools.ietf.org/html/rfc4648) the string
 * Create a Header Entry call Authorization
 * Set the Value of Authorization to Basic *Base64 Encoded String*
-That Header must be included on all requests made to the end point.
+
+That Header must be included on all requests made to the end point. That means that the client is responsible for creating
+the Basic Authentication Header and the Server just parses the Username and Password out of the header. 
+
+If a unauthenticated response is generated, then the server is expected to provide a WWW-Authenticate header in the form
+`WWW-Authenticate: Basic realm={REALM}`, where Realm is a server identifier that the client can use to determine the correct
+username and password combination. In addition the response header indicates that the Server is using Basic Authentication as
+the authentication strategy.
 
 ## Advantages of Basic Authentication
 
 * **Easy for the client and the server to implement**
 
 Basic Authentication does not require any particular external libraries or support to generate. Most modern languages will have the techniques to
-generate a Basic Authentication Token.
+generate a Basic Authentication Token. The Authentication Strategy is placed in the headers and does not require any special knowledge to
+decode or read.
 
 * **Easy to Decode**
 
@@ -26,7 +35,7 @@ always the same it becomes possible to identify the Authentication user for each
 
 * **It is built right into the HTTP Protocol**
 
-So it can always be expected to be available
+So it can always be expected to be available since it does not require a secondary library or technique to implement.
 
 * **Does not pollute the Message Body**
 
@@ -37,8 +46,12 @@ a GET request. In addition it does not bloat the message with extra data that ma
 
 * **Man in the Middle Attacks**
 
-If a message is intercepted, then the Authentication is easily decoded. Base64 encoding is not for encryption, but rather to ensure that characters
+If a message is intercepted, then the Authentication Header is easily decoded. Base64 encoding is not for encryption, but rather to ensure that characters
 are in a acceptable format for the HTTP Protocol.
+
+* **Cannot prevent Replay Attacks**
+
+It provides no technique to identify the origin of the message, so the same message can be sent repeatably to the Server.
 
 * **Client is Responsible**
 
@@ -108,3 +121,9 @@ send the following
                 "id": "1",
                 "name": "Test 1"
              }`
+
+# References
+
+[ASP.NET Identity Example](http://aspnet.codeplex.com/SourceControl/latest#Samples/WebApi/BasicAuthentication/)
+
+[ASP.NET Identity Explaination](http://aspnet.codeplex.com/SourceControl/latest#Samples/WebApi/BasicAuthentication/)

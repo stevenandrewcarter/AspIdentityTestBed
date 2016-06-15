@@ -11,7 +11,7 @@ using System.Web.Http;
 using System.Web.Http.Filters;
 using System.Web.Http.Results;
 
-namespace BasicAuthentication.Controllers {
+namespace BasicAuthentication.Filters {
 
   /// <summary>
   /// Creates a Result with a Realm Response in the Header. This is part of the Basic Authentication Definition for when

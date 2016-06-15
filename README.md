@@ -9,7 +9,10 @@ The projects are split as follows
 Example of User HTTP Basic Authentication as a Authentication Strategy using the ASP.NET Identity Framework.
 Basic Authentication is **not a recommended technique** and is just provided for completeness.
 
-* DigestAuthentication
+## DigestAuthentication
+
+A more secure strategy compared to HTTP Basic Authentication.
+
 * OAuthAuthentication
 * RolesAuthorization
 * ClaimsAuthorization

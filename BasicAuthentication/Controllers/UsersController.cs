@@ -1,4 +1,5 @@
-﻿using System.Web.Http;
+﻿using BasicAuthentication.Filters;
+using System.Web.Http;
 
 namespace BasicAuthentication.Controllers {
   /// <summary>
