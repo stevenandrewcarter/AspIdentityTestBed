@@ -46,13 +46,14 @@ The Client must encode the header, and as such if any changes occur to the passw
 to maintain if the Client is not aware of changes.
 
 * **Only deals with Authentication**
+
 The only details on the header are a username / password combination. The End Point is still responsible for authorization checks.
 
 ## Why use Basic Authentication
 
 Basic Authentication is useless as a process to ensure security. It does not provide encryption or ease of use with the Client when a password change
 occurs. What it does provide is a simple process of Authentication, which can be useful in a closed system (IE: Internal API Services). In general 
-basic authentication should not be used in a system
+basic authentication should not be used in a system with public facing end points.
 
 # The Project
 
@@ -82,6 +83,9 @@ is what the Controller needs to enable Basic Authentication on a Controller or R
 The only available end point is http://localhost/api/users/:id with the only valid id being 1. Other
 ids will be accepted but will return a 404 status code on a authenticated route.
 
+In order to Authenticate a Basic Authentication Request must be sent with the Username and Password
+being the same, but not blank.
+
 # Testing
 
 Run the Application in Visual Studio. Once running start up your favourite REST client and try
@@ -97,6 +101,7 @@ send the following
 
 *Request*: `GET http://localhost/api/users/1`
            `Header: Authorization:Basic dGVzdDp0ZXN0`
+           The Header contains the UserName *test* and password *test*
 
 *Response*: 200
             `{

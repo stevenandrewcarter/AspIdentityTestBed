@@ -63,6 +63,7 @@ namespace BasicAuthentication.Controllers {
         string password = parts[1].Trim();
         // Check if the UserName and Password are Equal and not blank
         if (!string.IsNullOrWhiteSpace(userId) && !string.IsNullOrWhiteSpace(password) && userId.Equals(password)) {
+          // Build a Claim and place it on the Principle.
           var claims = new List<Claim>() { new Claim(ClaimTypes.Name, "badri") };
           var id = new ClaimsIdentity(claims, "Basic");
           var principal = new ClaimsPrincipal(new[] { id });
