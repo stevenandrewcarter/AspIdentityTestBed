@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -128,6 +129,45 @@ namespace WebApi.Controllers {
       if (!addResult.Succeeded) {
         ModelState.AddModelError("", "Failed to add user roles");
         return BadRequest(ModelState);
+      }
+      return Ok();
+    }
+
+    [Authorize(Roles = "Admin")]
+    [Route("user/{id:guid}/assignclaims")]
+    [HttpPut]
+    public async Task<IHttpActionResult> AssignClaimsToUser([FromUri] string id, [FromBody] List<ClaimBindingModel> claimsToAssign) {
+      if (!ModelState.IsValid) {
+        return BadRequest(ModelState);
+      }
+      var appUser = await AppUserManager.FindByIdAsync(id);
+      if (appUser == null) {
+        return NotFound();
+      }
+      foreach (var claimModel in claimsToAssign) {
+        if (appUser.Claims.Any(c => c.ClaimType == claimModel.Type)) {
+          await AppUserManager.RemoveClaimAsync(id, ExtendedClaimsProvider.CreateClaim(claimModel.Type, claimModel.Value));
+        }
+        await AppUserManager.AddClaimAsync(id, ExtendedClaimsProvider.CreateClaim(claimModel.Type, claimModel.Value));
+      }
+      return Ok();
+    }
+
+    [Authorize(Roles = "Admin")]
+    [Route("user/{id:guid}/removeclaims")]
+    [HttpPut]
+    public async Task<IHttpActionResult> RemoveClaimsFromUser([FromUri] string id, [FromBody] List<ClaimBindingModel> claimsToRemove) {
+      if (!ModelState.IsValid) {
+        return BadRequest(ModelState);
+      }
+      var appUser = await AppUserManager.FindByIdAsync(id);
+      if (appUser == null) {
+        return NotFound();
+      }
+      foreach (var claimModel in claimsToRemove) {
+        if (appUser.Claims.Any(c => c.ClaimType == claimModel.Type)) {
+          await AppUserManager.RemoveClaimAsync(id, ExtendedClaimsProvider.CreateClaim(claimModel.Type, claimModel.Value));
+        }
       }
       return Ok();
     }

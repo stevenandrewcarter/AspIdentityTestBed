@@ -25,6 +25,8 @@ namespace WebApi.Providers {
         return;
       }
       var oAuthIdentity = await user.GenerateUserIdentityAsync(userManager, "JWT");
+      oAuthIdentity.AddClaims(ExtendedClaimsProvider.GetClaims(user));
+      oAuthIdentity.AddClaims(RolesFromClaims.CreateRolesBasedOnClaims(oAuthIdentity));
       var ticket = new AuthenticationTicket(oAuthIdentity, null);
       context.Validated(ticket);
     }
