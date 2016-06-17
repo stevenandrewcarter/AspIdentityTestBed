@@ -28,11 +28,11 @@ a template that will already set most of the Identity Framework up for you.
 * Create a Blank ASP.NET Project in Visual Studio
 * Install the Following Packages from Nuget
 ```
-Install-Package Microsoft.AspNet.Identity.Owin -Version 2.1.0
-Install-Package Microsoft.Owin.Host.SystemWeb -Version 3.0.0
-Install-Package Microsoft.AspNet.WebApi.Owin -Version 5.2.2
-Install-Package Microsoft.Owin.Cors -Version 3.0.0
-Install-Package Microsoft.Owin.Security.OAuth -Version 3.0.0
+Install-Package Microsoft.AspNet.Identity.Owin
+Install-Package Microsoft.Owin.Host.SystemWeb
+Install-Package Microsoft.AspNet.WebApi.Owin
+Install-Package Microsoft.Owin.Cors
+Install-Package Microsoft.Owin.Security.OAuth
 ```
 * Create a User Controller (Controllers\UsersController.cs)
 * Add a Authentication Filter for Basic Authentication (Controllers\BasicAuthenticator.cs)
