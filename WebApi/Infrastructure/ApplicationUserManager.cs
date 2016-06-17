@@ -15,7 +15,6 @@ namespace WebApi.Infrastructure {
     public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context) {
       var appDbContext = context.Get<ApplicationDbContext>();
       var appUserManager = new ApplicationUserManager(new UserStore<ApplicationUser>(appDbContext));
-      appUserManager.EmailService = new Services.EmailService();
       var dataProtectionProvider = options.DataProtectionProvider;
       if (dataProtectionProvider != null) {
         appUserManager.UserTokenProvider = new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("ASP.NET Identity")) {

@@ -13,7 +13,11 @@ Basic Authentication is **not a recommended technique** and is just provided for
 
 A more secure strategy compared to HTTP Basic Authentication.
 
-* OAuthAuthentication
-* RolesAuthorization
+## OAuthAuthentication
+
+Use OAuth 2.0 as a Authentication / Authorization strategy.
+
+## RoleBasedAuthorization
+
 * ClaimsAuthorization
 
