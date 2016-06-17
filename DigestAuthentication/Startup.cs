@@ -7,7 +7,7 @@ using System.Web.Http;
 namespace DigestAuthentication {
   public class Startup {
     public void Configuration(IAppBuilder app) {
-      HttpConfiguration httpConfig = new HttpConfiguration();
+      var httpConfig = new HttpConfiguration();
       ConfigureWebApi(httpConfig);
       app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
       app.UseWebApi(httpConfig);
