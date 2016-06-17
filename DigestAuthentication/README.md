@@ -5,12 +5,9 @@ Digest Authentication to verify the User Credentials.
 
 ## What is Digest Authentication
 
-In the HTTP Protocol [Digest Authentication](https://tools.ietf.org/html/rfc2617) is created by the following steps.
-
-* Take the Username and Password and concatenate them together with a ':'. Username:Password
-* Take that result and [Base64 Encode](https://tools.ietf.org/html/rfc4648) the string
-* Create a Header Entry call Authorization
-* Set the Value of Authorization to Basic *Base64 Encoded String*
+In the HTTP Protocol [Digest Authentication](https://tools.ietf.org/html/rfc2617) is a encrypted version of the Basic Authentication Strategy.
+It requires much more information from the client in order to create a encrypted Authentication token.
+Otherwise the approach is identical to the Basic Authentication process.
 
 That Header must be included on all requests made to the end point.
 
