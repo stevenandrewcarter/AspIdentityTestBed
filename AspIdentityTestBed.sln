@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "WebApi\WebApi.csproj", "{E705BFDB-ED81-43AA-984A-043244242AFE}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicAuthentication", "BasicAuthentication\BasicAuthentication.csproj", "{079B15F4-4249-4866-A955-AF5B36E4A497}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6E13F8A9-1768-4DEE-9F70-D4EB4269D05A}"
@@ -24,10 +22,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E705BFDB-ED81-43AA-984A-043244242AFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E705BFDB-ED81-43AA-984A-043244242AFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E705BFDB-ED81-43AA-984A-043244242AFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E705BFDB-ED81-43AA-984A-043244242AFE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{079B15F4-4249-4866-A955-AF5B36E4A497}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{079B15F4-4249-4866-A955-AF5B36E4A497}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{079B15F4-4249-4866-A955-AF5B36E4A497}.Release|Any CPU.ActiveCfg = Release|Any CPU

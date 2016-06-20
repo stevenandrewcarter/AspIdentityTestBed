@@ -69,6 +69,8 @@ The structure of the project is
 
 * **\Controllers**: The Controllers for the Routes. Provides the RESTful endpoints for the WebAPI.
 
+* **\Filters**: Example of a Claims Filter
+
 * **\Infrastructure**: The underlying implementation that connects the database and the ASP.NET Identity concepts together.
 
 * **\Migratations**: Database migrations and seeding. Review the Configuration.cs and the Seed Method for the Default Administrator User
@@ -134,37 +136,31 @@ Response
   }
 ]
 ```
-## Testing the Roles
 
-A User must have the Admin Role in order to access the */api/users* end point. Any other type of user will be denied if they attempt to access that url.
-So after creating a token as per the previous section it is possible to test that the roles work with the following requests.
+## Testing the Claims
+
+Retrieving the Claims for a Token is as simple as sending a GET request to the /api/claims endpoint.
 
 ```
-POST: /api/users
+GET: /api/claims
 
 HEADER: 
 Authorization: Bearer <TOKEN>
 
-BODY: {
-    "userName": "TestNormalUser",
-    "firstName": "Test",
-    "lastName": "Normal",
-    "password": "TestNormalUser",
-    "confirmPassword": "TestNormalUser",    
-    "email": "test2@test.com"
-  }
+BODY: [
+  {
+    "subject": "TestNormalUser",
+    "type": "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier",
+    "value": "ab80f898-d44c-4f62-8586-3d70198bc060"
+  },
+  {
+    "subject": "TestNormalUser",
+    "type": "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name",
+    "value": "TestNormalUser"
+  },
+...
+  ]
 ```
 
-Generate a Bearer Token as per the previous section for the *new* user. Then attempt to make a request against the end point with that new user.
-
-```
-GET: /api/users
-
-HEADER:
-Authorization: Bearer <TOKEN>
-
-RESPONSE:
-{
-  "message": "Authorization has been denied for this request."
-}
-```
+The user creation endpoint {POST:/api/users} has been updated to include a Claims check (Full Time Employee). That means a User must be both a Admin and a 
+Full time employee to access that API end point.

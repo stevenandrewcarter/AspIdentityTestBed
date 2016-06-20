@@ -21,6 +21,10 @@ Use OAuth 2.0 as a Authentication / Authorization strategy.
 
 Simple example to demostrate Roles in the ASP.NET Identity Framework
 
-## ClaimsAuthorization
+## ClaimsBasedAuthorization
 
-Simple example to demostrate Claims in the ASP.NET Identity Framework
+Simple example to demostrate Claims in the ASP.NET Identity Framework. Claims Authorization is really just an extension of the Role Based Authorization.
+
+# References
+
+[ASP.NET Identity 2.1 with ASP.NET Web API 2.2](http://bitoftech.net/2015/01/21/asp-net-identity-2-with-asp-net-web-api-2-accounts-management/): Claims and Role Based Authorization is based on this series of articles.
