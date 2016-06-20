@@ -116,8 +116,8 @@ From that response it is possible to send a request to any of end points on {\ap
 ```
 GET:\api\users
 
-Header
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1laWQiOiJlMGI5OWZkMC05NDBlLTQ4Y2UtOTkyMi03MTE2NmEwMWVjZjgiLCJ1bmlxdWVfbmFtZSI6IlN1cGVyUG93ZXJVc2VyIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS9hY2Nlc3Njb250cm9sc2VydmljZS8yMDEwLzA3L2NsYWltcy9pZGVudGl0eXByb3ZpZGVyIjoiQVNQLk5FVCBJZGVudGl0eSIsIkFzcE5ldC5JZGVudGl0eS5TZWN1cml0eVN0YW1wIjoiMjY0ODM3OTYtZTZiNC00YjQwLWE2YmUtYzA5MzhiNmI0NzA5Iiwicm9sZSI6WyJTdXBlckFkbWluIiwiQWRtaW4iXSwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo1Njk4NyIsImF1ZCI6IjA5OTE1M2MyNjI1MTQ5YmM4ZWNiM2U4NWUwM2YwMDIyIiwiZXhwIjoxNDY2MjU4MjgzLCJuYmYiOjE0NjYxNzE4ODN9.0onVkg_dvsbebBdmfLKcE8-LXVI3O6p_zNfBcx-RDTw
+HEADER:
+Authorization: Bearer <TOKEN>
 
 Response
 [
@@ -138,4 +138,37 @@ Response
   }
 ]
 ```
+## Testing the Roles
 
+A User must have the Admin Role in order to access the */api/users* end point. Any other type of user will be denied if they attempt to access that url.
+So after creating a token as per the previous section it is possible to test that the roles work with the following requests.
+
+```
+POST: /api/users
+
+HEADER: 
+Authorization: Bearer <TOKEN>
+
+BODY: {
+    "userName": "TestNormalUser",
+    "firstName": "Test",
+    "lastName": "Normal",
+    "password": "TestNormalUser",
+    "confirmPassword": "TestNormalUser",    
+    "email": "test2@test.com"
+  }
+```
+
+Generate a Bearer Token as per the previous section for the *new* user. Then attempt to make a request against the end point with that new user.
+
+```
+GET: /api/users
+
+HEADER:
+Authorization: Bearer <TOKEN>
+
+RESPONSE:
+{
+  "message": "Authorization has been denied for this request."
+}
+```

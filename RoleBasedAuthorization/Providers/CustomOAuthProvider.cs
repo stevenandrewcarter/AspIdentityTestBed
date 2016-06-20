@@ -21,10 +21,6 @@ namespace RoleBasedAuthorization.Providers {
         context.SetError("invalid_grant", "The user name or password is incorrect.");
         return;
       }
-      if (!user.EmailConfirmed) {
-        context.SetError("invalid_grant", "User did not confirm email.");
-        return;
-      }
       var oAuthIdentity = await user.GenerateUserIdentityAsync(userManager, "JWT");
       var ticket = new AuthenticationTicket(oAuthIdentity, null);
       context.Validated(ticket);

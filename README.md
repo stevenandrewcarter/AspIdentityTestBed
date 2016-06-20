@@ -19,5 +19,8 @@ Use OAuth 2.0 as a Authentication / Authorization strategy.
 
 ## RoleBasedAuthorization
 
-* ClaimsAuthorization
+Simple example to demostrate Roles in the ASP.NET Identity Framework
 
+## ClaimsAuthorization
+
+Simple example to demostrate Claims in the ASP.NET Identity Framework
