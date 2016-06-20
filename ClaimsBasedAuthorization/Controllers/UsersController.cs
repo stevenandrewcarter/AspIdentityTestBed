@@ -63,13 +63,13 @@ namespace ClaimsBasedAuthorization.Controllers {
 
     /// <summary>
     /// Route for POST:/api/users
-    /// Must have a claim called FTE which is satisfied
+    /// Must have a claim called VETERAN_USER which is satisfied
     /// </summary>
     /// <param name="createUserModel">A new user Binding Model</param>
     /// <returns>Request Created (201) if created, otherwise Bad Request (400). The body will contain a list of error messages</returns>
     [Route("users")]
     [Authorize(Roles = "Admin")]
-    [ClaimsAuthorization(ClaimType = "FTE", ClaimValue = "1")]
+    [ClaimsAuthorization(ClaimType = "VETERAN_USER", ClaimValue = "1")]
     [HttpPost]
     public async Task<IHttpActionResult> CreateUser(CreateUserBindingModel createUserModel) {
       if (!ModelState.IsValid) {

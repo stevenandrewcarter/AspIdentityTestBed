@@ -30,7 +30,7 @@ namespace RoleBasedAuthorization {
       app.CreatePerOwinContext(ApplicationDbContext.Create);
       app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
 
-      OAuthAuthorizationServerOptions OAuthServerOptions = new OAuthAuthorizationServerOptions() {
+      var OAuthServerOptions = new OAuthAuthorizationServerOptions() {
         //For Dev enviroment only (on production should be AllowInsecureHttp = false)
         AllowInsecureHttp = true,
         TokenEndpointPath = new PathString("/oauth/token"),

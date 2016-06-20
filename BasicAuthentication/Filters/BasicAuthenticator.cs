@@ -26,6 +26,10 @@ namespace BasicAuthentication.Filters {
       this.realm = realm;
     }
 
+    /// <summary>
+    /// Basic Authentication response. If the request is unauthenticated, send back a 
+    /// Basic Realm response.
+    /// </summary>
     public async Task<HttpResponseMessage> ExecuteAsync(CancellationToken cancellationToken) {
       var res = await next.ExecuteAsync(cancellationToken);
       if (res.StatusCode == HttpStatusCode.Unauthorized) {
@@ -55,12 +59,12 @@ namespace BasicAuthentication.Filters {
       // Check for the Basic Authentication Header
       if (req.Headers.Authorization != null && req.Headers.Authorization.Scheme.Equals("basic", StringComparison.OrdinalIgnoreCase)) {
         // Decode the String from Base64
-        Encoding encoding = Encoding.GetEncoding("iso-8859-1");
-        string credentials = encoding.GetString(Convert.FromBase64String(req.Headers.Authorization.Parameter));
+        var encoding = Encoding.GetEncoding("iso-8859-1");
+        var credentials = encoding.GetString(Convert.FromBase64String(req.Headers.Authorization.Parameter));
         // Split the String on the ':' character
-        string[] parts = credentials.Split(':');
-        string userId = parts[0].Trim();
-        string password = parts[1].Trim();
+        var parts = credentials.Split(':');
+        var userId = parts[0].Trim();
+        var password = parts[1].Trim();
         // Check if the UserName and Password are Equal and not blank
         if (!string.IsNullOrWhiteSpace(userId) && !string.IsNullOrWhiteSpace(password) && userId.Equals(password)) {
           // Build a Claim and place it on the Principle.
