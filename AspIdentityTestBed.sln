@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicAuthentication", "BasicAuthentication\BasicAuthentication.csproj", "{079B15F4-4249-4866-A955-AF5B36E4A497}"
 EndProject
@@ -17,6 +17,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClaimsBasedAuthorization", "ClaimsBasedAuthorization\ClaimsBasedAuthorization.csproj", "{86868BC5-8CCB-42CB-8570-74F65E31815A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OAuthAuthorization", "OAuthAuthorization\OAuthAuthorization.csproj", "{56F30288-E8B2-412E-8FE1-4DFA010B7BCC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicIdentity", "BasicIdentity\BasicIdentity.csproj", "{A82C3EF0-4814-435F-923F-3C1D34773949}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,6 +46,10 @@ Global
 		{56F30288-E8B2-412E-8FE1-4DFA010B7BCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56F30288-E8B2-412E-8FE1-4DFA010B7BCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{56F30288-E8B2-412E-8FE1-4DFA010B7BCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A82C3EF0-4814-435F-923F-3C1D34773949}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A82C3EF0-4814-435F-923F-3C1D34773949}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A82C3EF0-4814-435F-923F-3C1D34773949}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A82C3EF0-4814-435F-923F-3C1D34773949}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
